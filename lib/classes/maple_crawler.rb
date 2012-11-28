@@ -120,6 +120,15 @@ class MapleCrawler
         source.save
         puts "ids source: #{source.link} #{source.ep.title}"
       end
+    elsif @page_html.css(".tmp_controls a").present?
+      nodes = @page_html.css(".tmp_controls a")
+      nodes.each do |node|
+        source = YoutubeSource.new
+        source.ep = ep
+        source.link = node[:href]
+        source.save
+        puts "tmp_controls source: #{source.link} #{source.ep.title}"
+      end
     elsif @page_html.css(".videoGroup iframe").present?
       nodes = @page_html.css(".videoGroup iframe")
       nodes.each do |node|
