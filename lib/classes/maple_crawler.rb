@@ -141,6 +141,18 @@ class MapleCrawler
         source.save
         puts "video group source: #{source.link} #{source.ep.title}"
       end
+    elsif @page_html.css("#WATPlayerInstance").present?
+      nodes = @page_html.css("#WATPlayerInstance")
+      nodes.each do |node|
+        src = node[:data]
+        /swf2\/(.*)/ =~ src
+        src = "http://www.wat.tv/embedframe/" + $1
+        source = YoutubeSource.new
+        source.ep = ep
+        source.link = src
+        source.save
+        puts "wat source: #{source.link} #{source.ep.title}"
+      end
     elsif @page_html.css(".node_body iframe").present?
       node = @page_html.css(".node_body iframe")[0]
       source = YoutubeSource.new
@@ -154,18 +166,6 @@ class MapleCrawler
       source.link = src
       source.save
       puts "iframe source: #{source.link} #{source.ep.title}"
-    elsif @page_html.css("#WATPlayerInstance").present?
-      nodes = @page_html.css("#WATPlayerInstance")
-      nodes.each do |node|
-        src = node[:data]
-        /swf2\/(.*)/ =~ src
-        src = "http://www.wat.tv/embedframe/" + $1
-        source = YoutubeSource.new
-        source.ep = ep
-        source.link = src
-        source.save
-        puts "wat source: #{source.link} #{source.ep.title}"
-      end
     else
       source = YoutubeSource.new
       source.ep = ep
