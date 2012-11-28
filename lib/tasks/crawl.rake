@@ -17,9 +17,7 @@ namespace :crawl do
   task :crawl_ep => :environment do
     dramas = Drama.all
     dramas.each do |drama|
-      c = MapleCrawler.new
-      c.fetch drama.link
-      c.parse_ep drama
+      CrawlWorker.perform_async(drama.id)
     end
   end
 end

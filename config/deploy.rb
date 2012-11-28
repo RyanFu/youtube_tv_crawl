@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+require 'sidekiq/capistrano'
 # require 'hoptoad_notifier/capistrano'
 
 set :application, "youtube_crawl"

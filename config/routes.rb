@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 YoutubeCrawl::Application.routes.draw do
 
   namespace :api do
@@ -11,5 +12,5 @@ YoutubeCrawl::Application.routes.draw do
       resources :eps
     end
   end
-
+  mount Sidekiq::Web, at: '/sidekiq'
 end
