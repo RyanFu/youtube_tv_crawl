@@ -1,10 +1,10 @@
 class Api::V1::DramasController < Api::ApiController
 
   def index
-    @taiwan_ids = Drama.area_dramas(1)
-    @china_ids = Drama.area_dramas(2)
-    @korea_ids = Drama.area_dramas(3)
-    @japan_ids = Drama.area_dramas(4)
+    @taiwan_ids = Drama.area_dramas(1).map{|d| d.id}
+    @china_ids = Drama.area_dramas(2).map{|d| d.id}
+    @korea_ids = Drama.area_dramas(3).map{|d| d.id}
+    @japan_ids = Drama.area_dramas(4).map{|d| d.id}
     output = {}
     output["taiwan_ids"] = @taiwan_ids
     output["china_ids"] = @china_ids
