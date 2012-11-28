@@ -91,18 +91,21 @@ class MapleCrawler
 
   def parse_ep drama
     shows = @page_html.css(".shows .show a")
+    title = shows.text    
     shows.each do |show|
       ep = Ep.find_by_title(show.text)
       ep = Ep.new unless ep
       ep.title = show.text
       ep.drama = drama
+      next unless /第(\d*)集/ =~ ep.title
+      ep.num = $1
       ep.save
       puts "ep: #{ep.title} #{ep.drama.name}"
       url = show[:href]
       crawler = MapleCrawler.new
       crawler.fetch url
       crawler.parse_source(ep)
-    end
+    end   
   end
 
   def parse_source ep

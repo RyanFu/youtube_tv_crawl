@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20121127061814) do
   create_table "eps", :force => true do |t|
     t.string   "title"
     t.integer  "drama_id"
+    t.integer  "num"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
