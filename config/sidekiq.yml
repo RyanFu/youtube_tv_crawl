@@ -2,10 +2,10 @@
 # # Options here can still be overridden by cmd line args.
 # #   sidekiq -C config.yml
 # ---
-# :verbose: false
+:verbose: true
 # :pidfile: ./tmp/pids/sidekiq.pid
 # :namespace: sidekiq_namespace
-:concurrency:  4
+:concurrency:  5
 # :queues:
 #   - [often, 7]
 #   - [default, 5]
