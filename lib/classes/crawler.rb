@@ -19,6 +19,12 @@ module Crawler
   
   def get_page url
     # url = url.gsub(/\s+/, "")ex
+    if /node\/\d*\/(.*)\// =~ url
+      str = $1
+      query_str = {:q => str}.to_query.gsub("q=","")
+      url = url[0..url.index(str)-1] + query_str
+    end
+
     ecode_url = URI.encode(url)
     body = ''
 

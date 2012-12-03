@@ -1,7 +1,6 @@
 # encoding: utf-8
 class MapleCrawler
   include Crawler
-  
 
   def parse_dramas area
     nodes = @page_html.css(".yearSorting li")
