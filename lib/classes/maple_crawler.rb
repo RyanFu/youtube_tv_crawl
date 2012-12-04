@@ -170,12 +170,14 @@ class MapleCrawler
       puts "iframe source: #{source.link} #{source.ep.title}"
     elsif @page_html.css("center embed").present?
       nodes = @page_html.css("center embed")
-
+      
+      video_flag = false
       if @page_html.css("center object").present?
         nodes = @page_html.css("center object")
         nodes.each do |node|
           html_text = node.to_html
           if (html_text.index('youtube') | html_text.index('mediaservices'))
+            video_flag = true
             source = YoutubeSource.new
             source.ep = ep
             source.embed_text = html_text
@@ -183,14 +185,13 @@ class MapleCrawler
             source.link = "106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
-          else
-            save_maple ep
           end
         end
       else
         nodes.each do |node|
           html_text = node.to_html
           if (html_text.index('pptv')| (html_text.index('youtube') && !(html_text.index('enablejsapi'))))
+            video_flag = true
             source = YoutubeSource.new
             source.ep = ep
             source.embed_text = html_text
@@ -198,11 +199,11 @@ class MapleCrawler
             source.link = "106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
-          else
-            save_maple ep
           end
         end
       end
+
+      save_maple ep unless video_flag
     else
       save_maple ep
     end
