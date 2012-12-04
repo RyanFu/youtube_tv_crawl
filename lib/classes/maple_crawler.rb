@@ -181,21 +181,35 @@ class MapleCrawler
           source.save
           puts "source: #{source.link} #{source.ep.title}"
         else
-          source = YoutubeSource.new
-          source.ep = ep
-          source.link = @page_url
-          source.save
-          puts "source: #{source.link} #{source.ep.title}"
+          save_maple ep
         end
       end
-      
+      nodes = @page_html.css("center object")
+      nodes.each do |node|
+        html_text = node.to_html
+        if html_text.index('youtube')
+          source = YoutubeSource.new
+          source.ep = ep
+          source.embed_text = html_text
+          source.save
+          source.link = "106.187.51.230:8000/videos/#{source.id}"
+          source.save
+          puts "source: #{source.link} #{source.ep.title}"
+        else
+          save_maple ep
+        end
+      end
     else
-      source = YoutubeSource.new
-      source.ep = ep
-      source.link = @page_url
-      source.save
-      puts "source: #{source.link} #{source.ep.title}"
+      save_maple ep
     end
+  end
+
+  def save_maple ep
+    source = YoutubeSource.new
+    source.ep = ep
+    source.link = @page_url
+    source.save
+    puts "source: #{source.link} #{source.ep.title}"
   end
 
 end
