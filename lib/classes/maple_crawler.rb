@@ -198,6 +198,8 @@ class MapleCrawler
             source.link = "106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
+          else
+            save_maple ep
           end
         end
     else
