@@ -1,6 +1,6 @@
 class Ep < ActiveRecord::Base
   # attr_accessible :title, :body
-  belongs_to :drama
+  belongs_to :drama, :counter_cache => true
   has_many :youtube_sources
   
   scope :by_num_order, order('num DESC')
