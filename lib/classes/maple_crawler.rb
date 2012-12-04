@@ -190,7 +190,7 @@ class MapleCrawler
       else
         nodes.each do |node|
           html_text = node.to_html
-          if (html_text.index('pptv')| (html_text.index('youtube') && !(html_text.index('enablejsapi'))))
+          if (html_text.index('pptv')|| (html_text.index('youtube') && !(html_text.index('enablejsapi'))))
             video_flag = true
             source = YoutubeSource.new
             source.ep = ep
@@ -204,6 +204,15 @@ class MapleCrawler
       end
 
       save_maple ep unless video_flag
+    elsif @page_html.css("center iframe").present?
+      nodes = @page_html.css("center iframe")
+      nodes.each do |node|
+        source = YoutubeSource.new
+        source.ep = ep
+        source.link = node[:src]
+        source.save
+        puts "video group source: #{source.link} #{source.ep.title}"
+      end
     else
       save_maple ep
     end
