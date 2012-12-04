@@ -172,7 +172,7 @@ class MapleCrawler
       nodes = @page_html.css("center embed")
       nodes.each do |node|
         html_text = node.to_html
-        if html_text.index('pptv')
+        if (html_text.index('pptv')|html_text.index('youtube'))
           source = YoutubeSource.new
           source.ep = ep
           source.embed_text = html_text
@@ -180,8 +180,6 @@ class MapleCrawler
           source.link = "106.187.51.230:8000/videos/#{source.id}"
           source.save
           puts "source: #{source.link} #{source.ep.title}"
-        else
-          save_maple ep
         end
       end
       nodes = @page_html.css("center object")
