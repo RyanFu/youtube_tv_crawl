@@ -199,7 +199,7 @@ class MapleCrawler
             source.link = "106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
-          elsif (html_text.index('share.vrs.sohu'))
+          elsif (html_text.index('share.vrs.sohu') || html_text.index('player.56.com'))
             video_flag = true
             source = YoutubeSource.new
             source.ep = ep
