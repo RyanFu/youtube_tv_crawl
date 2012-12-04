@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
   def show
-    @video = YoutubeSource.first
+    @video = YoutubeSource.find(params[:id])
   end
 end
