@@ -190,7 +190,7 @@ class MapleCrawler
       else
         nodes.each do |node|
           html_text = node.to_html
-          if (html_text.index('pptv')|| (html_text.index('youtube') && !(html_text.index('enablejsapi'))))
+          if (html_text.index('pptv') || (html_text.index('youtube') && !(html_text.index('enablejsapi'))) || html_text.index('macromedia'))
             video_flag = true
             source = YoutubeSource.new
             source.ep = ep
@@ -199,6 +199,13 @@ class MapleCrawler
             source.link = "106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
+          elsif (html_text.index('share.vrs.sohu'))
+            video_flag = true
+            source = YoutubeSource.new
+            source.ep = ep
+            source.link = node[:src]
+            source.save
+            puts "embed video source: #{source.link} #{source.ep.title}"
           end
         end
       end
