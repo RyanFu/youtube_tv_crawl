@@ -202,6 +202,7 @@ class MapleCrawler
             save_maple ep
           end
         end
+      end
     else
       save_maple ep
     end
