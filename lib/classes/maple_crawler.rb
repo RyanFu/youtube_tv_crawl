@@ -190,7 +190,7 @@ class MapleCrawler
       else
         nodes.each do |node|
           html_text = node.to_html
-          if (html_text.index('pptv')|html_text.index('youtube'))
+          if (html_text.index('pptv')| (html_text.index('youtube') && !(html_text.index('enablejsapi'))))
             source = YoutubeSource.new
             source.ep = ep
             source.embed_text = html_text
