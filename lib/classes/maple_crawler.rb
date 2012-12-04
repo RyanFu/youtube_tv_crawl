@@ -176,7 +176,7 @@ class MapleCrawler
         nodes = @page_html.css("center object")
         nodes.each do |node|
           html_text = node.to_html
-          if (html_text.index('youtube') | html_text.index('mediaservices'))
+          if (html_text.index('youtube') || html_text.index('mediaservices'))
             video_flag = true
             source = YoutubeSource.new
             source.ep = ep
