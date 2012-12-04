@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127061814) do
+ActiveRecord::Schema.define(:version => 20121204052333) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20121127061814) do
     t.integer  "ep_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "embed_text"
   end
 
   add_index "youtube_sources", ["ep_id"], :name => "index_youtube_sources_on_ep_id"
