@@ -182,7 +182,7 @@ class MapleCrawler
             source.ep = ep
             source.embed_text = html_text
             source.save
-            source.link = "106.187.51.230:8000/videos/#{source.id}"
+            source.link = "http://106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
           end
@@ -196,7 +196,7 @@ class MapleCrawler
             source.ep = ep
             source.embed_text = html_text
             source.save
-            source.link = "106.187.51.230:8000/videos/#{source.id}"
+            source.link = "http://106.187.51.230:8000/videos/#{source.id}"
             source.save
             puts "source: #{source.link} #{source.ep.title}"
           elsif (html_text.index('share.vrs.sohu') || html_text.index('player.56.com'))
