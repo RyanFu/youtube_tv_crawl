@@ -97,7 +97,7 @@ class MapleCrawler
       nodes.each do |node|
         source = YoutubeSource.new
         source.ep = ep
-        source.link = node[:href]
+        source.link = youtube_link(node[:href])
         source.save
         puts "tmp_controls source: #{source.link} #{source.ep.title}"
       end
@@ -106,7 +106,7 @@ class MapleCrawler
       nodes.each do |node|
         source = YoutubeSource.new
         source.ep = ep
-        source.link = node[:src]
+        source.link = youtube_link(node[:src])
         source.save
         puts "video group source: #{source.link} #{source.ep.title}"
       end
@@ -132,7 +132,7 @@ class MapleCrawler
         ($1.index("/")) ? (src = $1[0..$1.index("?")-1]) : (src = $1)
         src = "http://www.youtube.com/watch?v=" + src
       end
-      source.link = src
+      source.link = youtube_link(src)
       source.save
       puts "iframe source: #{source.link} #{source.ep.title}"
     elsif @page_html.css("center embed").present?
@@ -183,7 +183,7 @@ class MapleCrawler
       nodes.each do |node|
         source = YoutubeSource.new
         source.ep = ep
-        source.link = node[:src]
+        source.link = youtube_link(node[:src])
         source.save
         puts "video group source: #{source.link} #{source.ep.title}"
       end
@@ -200,4 +200,12 @@ class MapleCrawler
     puts "source: #{source.link} #{source.ep.title}"
   end
 
+  def youtube_link link
+    if index = (/v=/ =~ link)
+      v = link[index+2..index+12]
+      "http://www.youtube.com/watch?v=" + v
+    else
+      link
+    end
+  end
 end
