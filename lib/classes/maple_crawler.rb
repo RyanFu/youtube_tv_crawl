@@ -39,6 +39,8 @@ class MapleCrawler
     drama = Drama.find_by_name(titles[0])
     puts " drama : #{drama.name} #{drama.name_en} #{drama.poster_url} #{drama.introduction} #{drama.release_date} #{drama.area.name} #{drama.directors} #{drama.actors}" if drama
     return if drama
+    
+    return if discard_dramas titles[0]
 
     drama = Drama.new unless drama
     drama.name = titles[0]
@@ -53,6 +55,14 @@ class MapleCrawler
     drama.save
 
     puts " drama : #{drama.name} #{drama.name_en} #{drama.poster_url} #{drama.introduction} #{drama.release_date} #{drama.area.name} #{drama.directors} #{drama.actors}"
+  end
+
+  def discard_dramas title
+    discard = %w(我可能不會愛你 愛情闖進門 第八號當舖 大兵日记 華麗的挑戰 媳婦是怎樣煉成的 武則天祕史 紫禁驚雷 歡喜婆婆俏媳婦 金大班的最后一夜 李小龍傳奇 子夜 宮心計 鹿鼎記 順藤而上的你 需要浪漫 美味人生 傻瓜媽媽 女人的色彩 再見老婆 闭嘴家族 新妓生傳 豪門之路 對我說謊試試 鵲橋兄弟們 真心給我一滴淚 女人的香氣 我的愛在我身 光与影 守護boss 惡作劇之吻\(韓版\) 檢察官公主 麵包王金卓求 檢察官公主 愛情的代價 燦爛的遺產 使的誘惑 千億寵愛在一身 我的野蠻王妃 愛情正在直播 愛在哈佛 城市獵人 兄妹契約 千次的吻 白戶修的事件簿 家政婦三田 深夜食堂 我和明星的99天 咩妹的完美執 很想見你 原来是美男啊 美丽人生)
+    discard.each do |t|
+      return true if title.index(t)
+    end
+    return false
   end
 
   def parse_ep drama
