@@ -133,18 +133,21 @@ class MapleCrawler
         puts "wat source: #{source.link} #{source.ep.title}"
       end
     elsif @page_html.css(".node_body iframe").present?
-      node = @page_html.css(".node_body iframe")[0]
-      source = YoutubeSource.new
-      source.ep = ep
-      src = node[:src]
-      if src.index("youtube")
-        /embed\/(.*)/ =~ src
-        ($1.index("/")) ? (src = $1[0..$1.index("?")-1]) : (src = $1)
-        src = "http://www.youtube.com/watch?v=" + src
+      nodes = @page_html.css(".node_body iframe")
+
+      nodes.each do |node|
+        source = YoutubeSource.new
+        source.ep = ep
+        src = node[:src]
+        if src.index("youtube")
+          /embed\/(.*)/ =~ src
+          ($1.index("/")) ? (src = $1[0..$1.index("?")-1]) : (src = $1)
+          src = "http://www.youtube.com/watch?v=" + src
+        end
+        source.link = src
+        source.save
+        puts "iframe source: #{source.link} #{source.ep.title}"
       end
-      source.link = youtube_link(src)
-      source.save
-      puts "iframe source: #{source.link} #{source.ep.title}"
     elsif @page_html.css("center embed").present?
       nodes = @page_html.css("center embed")
       
