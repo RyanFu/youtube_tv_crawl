@@ -58,7 +58,7 @@ class MapleCrawler
   end
 
   def discard_dramas title
-    discard = %w(我可能不會愛你 愛情闖進門 第八號當舖 大兵日记 華麗的挑戰 媳婦是怎樣煉成的 武則天祕史 紫禁驚雷 歡喜婆婆俏媳婦 金大班的最后一夜 李小龍傳奇 子夜 宮心計 鹿鼎記 順藤而上的你 需要浪漫 美味人生 傻瓜媽媽 女人的色彩 再見老婆 闭嘴家族 新妓生傳 豪門之路 對我說謊試試 鵲橋兄弟們 真心給我一滴淚 女人的香氣 我的愛在我身 光与影 守護boss 惡作劇之吻\(韓版\) 檢察官公主 麵包王金卓求 檢察官公主 愛情的代價 燦爛的遺產 使的誘惑 千億寵愛在一身 我的野蠻王妃 愛情正在直播 愛在哈佛 城市獵人 兄妹契約 千次的吻 白戶修的事件簿 家政婦三田 深夜食堂 我和明星的99天 咩妹的完美執 很想見你 原来是美男啊 美丽人生)
+    discard = %w(我可能不會愛你 愛情闖進門 第8號當舖 大兵日记 華麗的挑戰 媳婦是怎樣煉成的 武則天祕史 紫禁驚雷 歡喜婆婆俏媳婦 金大班的最后一夜 李小龍傳奇 子夜 宮心計 鹿鼎記 順藤而上的你 需要浪漫 美味人生 傻瓜媽媽 女人的色彩 再見老婆 闭嘴家族 新妓生傳 豪門之路 對我說謊試試 鵲橋兄弟們 真心給我一滴淚 女人的香氣 我的愛在我身 光与影 守護老闆 惡作劇之吻\(韓版\) 檢察官公主 麵包王金卓求 檢察官公主 愛情的代價 燦爛的遺產 使的誘惑 千億寵愛在一身 我的野蠻王妃 愛情正在直播 愛在哈佛 城市獵人 兄妹契約 千次的吻 白戶修的事件簿 家政婦三田 深夜食堂 我和明星的99天 咩妹的完美執 很想見你 原来是美男啊 美丽人生 秘密花園)
     discard.each do |t|
       return true if title.index(t)
     end
@@ -71,7 +71,7 @@ class MapleCrawler
     shows.each do |show|
       ep = Ep.find_by_title(show.text)
       ##### 
-      # next if ep
+      next if ep
       #####
       ep = Ep.new unless ep
       ep.title = show.text
@@ -195,7 +195,7 @@ class MapleCrawler
         source.ep = ep
         source.link = youtube_link(node[:src])
         source.save
-        puts "video group source: #{source.link} #{source.ep.title}"
+        puts "center iframe source: #{source.link} #{source.ep.title}"
       end
     else
       save_maple ep
