@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204052333) do
+ActiveRecord::Schema.define(:version => 20121207030214) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(:version => 20121204052333) do
     t.integer  "eps_count",    :default => 0
     t.string   "release_date"
     t.string   "link"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_show",      :default => false
   end
 
   add_index "dramas", ["area_id"], :name => "index_dramas_on_area_id"
