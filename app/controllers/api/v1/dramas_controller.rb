@@ -1,7 +1,7 @@
 class Api::V1::DramasController < Api::ApiController
 
   def index
-    @drama_ids = Drama.select(:id).all.map{|d| d.id}
+    @drama_ids = Drama.select(:id).show_dramas.map{|d| d.id}
     render :json => @drama_ids
   end
 
