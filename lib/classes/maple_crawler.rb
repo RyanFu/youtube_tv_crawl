@@ -77,7 +77,7 @@ class MapleCrawler
       ep = Ep.new unless ep
       ep.title = show.text
       ep.drama = drama
-      next unless /第(\d*)集/ =~ ep.title
+      next unless /第(\d*)/ =~ ep.title
       ep.num = $1
       ep.save
       puts "ep: #{ep.title} #{ep.drama.name}"
