@@ -215,9 +215,8 @@ class MapleCrawler
   end
 
   def youtube_link link
-    if index = (/v=/ =~ link)
-      v = link[index+2..index+12]
-      "http://www.youtube.com/watch?v=" + v
+    if /youtube.com\/watch\?v=(.{11})/ =~ link
+      "http://www.youtube.com/watch?v=" + $1
     else
       link
     end
