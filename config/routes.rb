@@ -12,7 +12,11 @@ YoutubeCrawl::Application.routes.draw do
           get 'dramas_with_views'
         end
       end
-      resources :youtube_sources
+      resources :youtube_sources do
+        collection do
+          get 'find_by_drama_and_ep_num'
+        end
+      end
       resources :eps
     end
   end
