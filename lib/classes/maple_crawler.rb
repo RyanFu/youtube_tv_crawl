@@ -79,6 +79,12 @@ class MapleCrawler
       ep.drama = drama
       next unless /第(\d*)/ =~ ep.title
       ep.num = $1
+      
+      #######
+      eps = Ep.where(:num => ep.num, :drama_id => ep.drama_id)
+      next unless eps.blank?
+      #######
+
       ep.save
       puts "ep: #{ep.title} #{ep.drama.name}"
       url = show[:href]
