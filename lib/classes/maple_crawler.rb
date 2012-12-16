@@ -223,8 +223,67 @@ class MapleCrawler
   def youtube_link link
     if /youtube.com\/watch\?v=(.{11})/ =~ link
       "http://www.youtube.com/watch?v=" + $1
+    elsif /www.youtube.com\/embed\/(.{11})/ =~ link
+      "http://www.youtube.com/watch?v=" + $1
+    elsif /www.youtube.com\/v\/(.{11})/ =~ link
+      "http://www.youtube.com/watch?v=" + $1
     else
       link
     end
   end
+
+  def generate_youtube_or_dailymotion id
+    if id.length == 11
+      "http://www.youtube.com/watch?v=#{id}"
+    else
+      "http://www.dailymotion.com/embed/video/#{id}?hideInfos=1"
+    end
+  end
+
+  def rewrite_parse_source ep
+    ep.youtube_sources.each{|s| s.delete}
+
+
+    if @page_html.css("#video_ids").present?
+      id_text = @page_html.css("#video_ids").text
+      ids = id_text.split(",")
+      ids.each do |id|
+        source = YoutubeSource.new
+        source.ep = ep
+        source.link = generate_youtube_or_dailymotion(id)
+        source.save
+        puts "ids source: #{source.link} #{source.ep.title}"
+      end
+      return
+    end
+    if @page_html.css("iframe").present?
+      nodes = @page_html.css("iframe")
+      nodes.each do |node|
+        src = node[:src]
+        if (src.index("youtube") || src.index("dailymotion"))
+          source = YoutubeSource.new
+          source.ep = ep
+          source.link = youtube_link(src)
+          source.save
+          puts "iframe source: #{source.link} #{source.ep.title}"
+        end
+      end
+    end
+    if @page_html.css("object").present?
+      nodes = @page_html.css("object")
+      nodes.each do |node|
+        data = node[:data]
+        if data.index("youtube")
+          source = YoutubeSource.new
+          source.ep = ep
+          source.link = youtube_link(src)
+          source.save
+          puts "object source: #{source.link} #{source.ep.title}"
+        end
+      end
+    end
+  end
+
+
+
 end

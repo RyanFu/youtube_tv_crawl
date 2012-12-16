@@ -17,7 +17,11 @@ YoutubeCrawl::Application.routes.draw do
           get 'find_by_drama_and_ep_num'
         end
       end
-      resources :eps
+      resources :eps do
+        collection do
+          get 'update_ep'
+        end
+      end
     end
   end
   mount Sidekiq::Web, at: '/sidekiq'
