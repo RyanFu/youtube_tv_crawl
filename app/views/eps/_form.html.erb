@@ -1,0 +1,8 @@
+<%= @ep.title %>
+<%= form_for "", :url => update_ep_eps_path, :method => :put do |f|%>
+
+<%= f.text_field "ep_id",:value => @ep.id,:type => "hidden" %><br />
+<%= f.label :url %>:
+<%= f.text_field "url" %><br />
+
+<% end %>

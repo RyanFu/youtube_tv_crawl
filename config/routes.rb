@@ -2,6 +2,13 @@ require 'sidekiq/web'
 YoutubeCrawl::Application.routes.draw do
   
 
+  resources :eps,:only => [:show, :index, :edit] do 
+    collection do
+      put 'search'
+      put 'update_ep'
+    end
+  end
+
   resources :videos
   namespace :api do
     get 'promotion' => 'api#promotion'
@@ -17,11 +24,7 @@ YoutubeCrawl::Application.routes.draw do
           get 'find_by_drama_and_ep_num'
         end
       end
-      resources :eps do
-        collection do
-          get 'update_ep'
-        end
-      end
+      resources :eps
     end
   end
   mount Sidekiq::Web, at: '/sidekiq'

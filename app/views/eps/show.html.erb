@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+<%= @ep.title %> </br>
+<% @ep.youtube_sources.each do |youtube_source| %>
+<%= youtube_source.link %></br>
+
+<% end %>
+
+<%= link_to 'Edit', edit_ep_path(@ep) %> |
+<%= link_to 'Back', eps_path %>

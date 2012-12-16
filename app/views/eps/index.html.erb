@@ -1,0 +1,26 @@
+<h1>Listing eps</h1>
+<%= form_for "", :url => search_eps_path, :method => :put do |f|%>
+
+<%= f.text_field "search" %><br />
+
+<% end %>
+
+<%= will_paginate @eps %>
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @eps.each do |ep| %>
+  <tr>
+    <td><%= ep.title %></td>
+    <td><%= link_to 'Show', ep %></td>
+    <td><%= link_to 'Edit', edit_ep_path(ep) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
