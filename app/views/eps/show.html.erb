@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%= @ep.title %> </br>
 <% @ep.youtube_sources.each do |youtube_source| %>
-<%= youtube_source.link %></br>
+<%= link_to youtube_source.link, youtube_source.link %></br>
 
 <% end %>
 
