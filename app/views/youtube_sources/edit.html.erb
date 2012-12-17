@@ -1,0 +1,13 @@
+<h1>Editing Sources</h1>
+
+原 link : <%= @source.link %>
+<%= form_for @source, :method => :put do |f|%>
+
+  <%= f.text_field :id,:type => "hidden" %><br />
+
+  <%= f.label :link %>:
+  <%= f.text_field :link %><br />
+
+  <%= f.submit %>
+
+<% end %>

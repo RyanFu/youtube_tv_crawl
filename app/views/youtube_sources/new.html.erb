@@ -1,0 +1,8 @@
+<%= form_for YoutubeSource.new do |f|%>
+  <%= f.text_field :ep_id, :value => @ep_id,:type => "hidden"%>
+  <%= f.label :link %>:
+  <%= f.text_field :link %><br />
+
+  <%= f.submit %>
+
+<% end %>

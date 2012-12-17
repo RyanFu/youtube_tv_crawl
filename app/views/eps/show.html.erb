@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 <%= @ep.title %> </br>
-<% @ep.youtube_sources.each do |youtube_source| %>
-<%= link_to youtube_source.link, youtube_source.link %></br>
 
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ep.youtube_sources.each do |youtube_source| %>
+  <tr>
+    <td> <%= link_to youtube_source.link, youtube_source.link %></td>
+    <td><%= link_to 'Edit', edit_youtube_source_path(youtube_source) %></td>
+    <td><%= link_to 'New', new_youtube_source_path({:ep_id => @ep.id}) %></td>
+    <td><%= link_to 'Destroy', youtube_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
+</table>
+
 
 <%= link_to 'Edit', edit_ep_path(@ep) %> |
 <%= link_to 'Back', eps_path %>

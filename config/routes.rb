@@ -9,6 +9,8 @@ YoutubeCrawl::Application.routes.draw do
     end
   end
 
+  resources :youtube_sources,:only => [:new, :edit,:update,:create,:destroy]
+
   resources :videos
   namespace :api do
     get 'promotion' => 'api#promotion'
