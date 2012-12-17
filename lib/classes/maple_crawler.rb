@@ -70,11 +70,14 @@ class MapleCrawler
     shows = @page_html.css(".shows .show a")
     title = shows.text    
     shows.each do |show|
-      ep = Ep.find_by_title(show.text)
+      
+      index = (/第(\d*)/ =~ show.text)
+      $1.length
+      eps = Ep.where(["title like ?", "%#{show.text[0..index+$1.length+2]}%"])
       ##### 
-      next if ep
+      next if eps.present?
       #####
-      ep = Ep.new unless ep
+      ep = Ep.new
       ep.title = show.text
       ep.drama = drama
       next unless /第(\d*)/ =~ ep.title
