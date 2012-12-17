@@ -10,11 +10,28 @@ module Crawler
     @page_html = get_page(@page_url)   
   end
 
+  def fetch_without_encode_url url
+    @page_url = url
+    @page_html = get_page_without_encode(@page_url)   
+  end
+
   def post_fetch url, option
     @page_url = url
     url = URI.parse(url)
     resp, data = Net::HTTP.post_form(url, option)
     @page_html = Nokogiri::HTML(resp.body)
+  end
+
+  def get_page_without_encode url
+    ecode_url = url
+    body = ''
+   begin
+      open(ecode_url){ |io|
+          body = io.read
+      }
+   rescue
+   end
+    doc = Nokogiri::HTML(body)
   end
   
   def get_page url

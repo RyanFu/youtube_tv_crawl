@@ -19,8 +19,7 @@ class EpsController < ApplicationController
     ep = Ep.find(params[:ep_id])
     url = params[:url]
     crawl = MapleCrawler.new
-    crawl.fetch url
-    puts url
+    crawl.fetch_without_encode_url url
     crawl.rewrite_parse_source ep
     redirect_to :action => 'show', :id => ep.id
   end
