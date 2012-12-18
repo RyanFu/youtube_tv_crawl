@@ -24,7 +24,7 @@ class Api::V1::DramasController < Api::ApiController
   end
 
   def dramas_with_views
-    @drama_ids = Drama.select('id,views,eps_count').show_dramas
+    @drama_ids = Drama.select('id,views,eps_num_str').show_dramas
     render :json => @drama_ids
   end
 

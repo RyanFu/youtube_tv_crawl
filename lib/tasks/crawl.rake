@@ -20,4 +20,20 @@ namespace :crawl do
       CrawlWorker.perform_async(drama.id)
     end
   end
+
+  task :regenerate_drama_eps_str => :environment do
+
+    Ep.find_in_batches(:batch_size => 1000) do |eps|
+      eps.each do |ep|
+        ep.delete unless ep.num
+      end
+    end
+
+    Drama.all.each do |drama|
+      eps_id = Ep.where(:drama_id => drama.id).order("num ASC").map{ |e| e.num}
+      str = eps_id.join(",")
+      drama.eps_num_str = str
+      drama.save
+    end
+  end
 end
