@@ -24,6 +24,10 @@ env :PATH, ENV['PATH']
 every :day, :at => '03:01am' do  
   rake 'crawl:crawl_ep',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:crawl_drama',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-  rake 'crawl:regenerate_drama_eps_str',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'db:data:dump',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+
+every :day, :at => '05:00am' do
+  rake 'crawl:regenerate_drama_eps_str',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
