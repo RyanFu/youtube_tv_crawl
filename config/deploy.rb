@@ -15,9 +15,9 @@ set :deploy_to, "/home/apps/youtube_crawl"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-role :web, "106.186.21.179"
-role :app, "106.186.21.179"
-role :db,  "106.186.21.179", :primary => true
+role :web, "106.187.51.230","106.186.21.200"
+role :app, "106.187.51.230","106.186.21.200"
+role :db,  "106.187.51.230", :primary => true
 
 namespace :deploy do
 
