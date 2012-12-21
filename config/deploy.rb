@@ -6,7 +6,7 @@ set :application, "youtube_crawl"
 set :rails_env, "production"
 
 set :branch, "master"
-set :repository,  "git@github.com:StevenKo/youtube_tv_crawl.git"
+set :repository,  "https://github.com/StevenKo/youtube_tv_crawl.git"
 set :scm, "git"
 set :user, "apps" # 一個伺服器上的帳戶用來放你的應用程式，不需要有sudo權限，但是需要有權限可以讀取Git repository拿到原始碼
 set :port, "222"
@@ -15,9 +15,9 @@ set :deploy_to, "/home/apps/youtube_crawl"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-role :web, "106.187.51.230"
-role :app, "106.187.51.230"
-role :db,  "106.187.51.230", :primary => true
+role :web, "106.186.21.179"
+role :app, "106.186.21.179"
+role :db,  "106.186.21.179", :primary => true
 
 namespace :deploy do
 
