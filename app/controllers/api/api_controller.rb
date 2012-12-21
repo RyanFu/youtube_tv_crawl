@@ -15,7 +15,7 @@ class Api::ApiController  < ActionController::Base
                  :link => "http://goo.gl/NB8hI",
                  :tilte => "幫電視連續劇評分",
                  :description => "歡迎到 Google Play 給電影時刻表中肯的建議與評價, 謝謝！",
-                 :version => 1
+                 :version => 2
     }
 
     render :json => promotion.to_json
