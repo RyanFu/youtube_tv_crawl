@@ -12,10 +12,10 @@ class Api::ApiController  < ActionController::Base
 
   def promotion
     promotion = {:picture_link => "http://ext.pimg.tw/jumplives/1352973893-4060856514.png?v=1352973903", 
-                 :link => "http://goo.gl/NB8hI",
-                 :tilte => "幫電視連續劇評分",
-                 :description => "歡迎到 Google Play 給電視連續劇中肯的建議與評價, 謝謝！",
-                 :version => 2
+                 :link => "http://goo.gl/uIxK6",
+                 :tilte => "請檢查APP版本",
+                 :description => "你好,因為舊版本有些程式上的錯誤,請務必更新至最新的電視連續劇APP, 謝謝！",
+                 :version => 3
     }
 
     render :json => promotion.to_json
