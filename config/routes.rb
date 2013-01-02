@@ -20,6 +20,7 @@ YoutubeCrawl::Application.routes.draw do
           get 'dramas_info'
           get 'new_dramas_info'
           get 'dramas_with_views'
+          get 'dramas_with_views_v2'
         end
       end
       resources :youtube_sources do

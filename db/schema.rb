@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221023112) do
+ActiveRecord::Schema.define(:version => 20130102053808) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20121221023112) do
     t.boolean  "is_show",      :default => false
     t.integer  "views",        :default => 0
     t.text     "eps_num_str"
+    t.boolean  "is_show_v2",   :default => false
   end
 
   add_index "dramas", ["area_id"], :name => "index_dramas_on_area_id"
