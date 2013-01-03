@@ -11,7 +11,7 @@ class EpsController < ApplicationController
   end
 
   def search
-    search_text = params[:search]
+    search_text = params[:search].strip
     @eps = Ep.where(["title like ?", "%#{search_text}%"]).order("num DESC")
   end
 
