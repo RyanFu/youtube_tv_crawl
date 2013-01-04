@@ -11,13 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102053808) do
+ActiveRecord::Schema.define(:version => 20130104033715) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "device_watch_infos", :force => true do |t|
+    t.string   "registration_id", :null => false
+    t.integer  "drama_id"
+    t.text     "watched_ep"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "device_watch_infos", ["registration_id"], :name => "index_device_watch_infos_on_registration_id", :unique => true
 
   create_table "dramas", :force => true do |t|
     t.string   "name"
