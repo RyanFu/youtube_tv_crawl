@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20130104033715) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "device_watch_infos", ["registration_id"], :name => "index_device_watch_infos_on_registration_id", :unique => true
+  add_index "device_watch_infos", ["registration_id"], :name => "index_device_watch_infos_on_registration_id"
 
   create_table "dramas", :force => true do |t|
     t.string   "name"

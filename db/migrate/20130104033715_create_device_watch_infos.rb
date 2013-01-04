@@ -7,6 +7,6 @@ class CreateDeviceWatchInfos < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :device_watch_infos, :registration_id, :unique => true
+    add_index :device_watch_infos, :registration_id
   end
 end

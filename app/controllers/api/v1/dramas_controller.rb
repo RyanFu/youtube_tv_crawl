@@ -40,7 +40,7 @@ class Api::V1::DramasController < Api::ApiController
       device.watched_ep << params[:ep_num].to_i unless device.watched_ep.include?(params[:ep_num].to_i)
     else device
       device = DeviceWatchInfo.new
-      device.drama_id = [params[:drama_id]]
+      device.drama_id = params[:drama_id]
       device.watched_ep = [params[:ep_num].to_i]
       device.registration_id = params[:registration_id]
     end
