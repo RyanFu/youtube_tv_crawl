@@ -21,6 +21,16 @@ namespace :crawl do
     end
   end
 
+  task :crawl_ep_single_thread => :environment do
+    dramas = Drama.all
+    dramas.each do |drama|
+      c = MapleCrawler.new
+      c.fetch drama.link
+      #puts "parse link: " + drama.link
+      c.parse_ep drama
+    end
+  end
+
   task :regenerate_drama_eps_str => :environment do
 
     Ep.find_in_batches(:batch_size => 1000) do |eps|

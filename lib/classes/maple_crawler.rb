@@ -25,6 +25,9 @@ class MapleCrawler
     titles = title.split("/")
     titles.each{|title| title.strip!}
     body_node = @page_html.css(".show_body")
+
+    return if body_node == nil
+
     pic_url = body_node.css("p img")[0][:src]
     summary = body_node.css("p")[2] if body_node.css("p")[2]
     summary = body_node.css("p")[1] if (body_node.css("p")[1] && (summary.blank?)) 
@@ -54,7 +57,7 @@ class MapleCrawler
     drama.area = a
     drama.save
 
-    puts " drama : #{drama.name} #{drama.name_en} #{drama.poster_url} #{drama.introduction} #{drama.release_date} #{drama.area.name} #{drama.directors} #{drama.actors}"
+    #puts " drama : #{drama.name} #{drama.name_en} #{drama.poster_url} #{drama.introduction} #{drama.release_date} #{drama.area.name} #{drama.directors} #{drama.actors}"
   end
 
   def discard_dramas title
@@ -68,11 +71,15 @@ class MapleCrawler
 
   def parse_ep drama
     shows = @page_html.css(".shows .show a")
-    title = shows.text    
+    title = shows.text
     shows.each do |show|
       
       index = (/第(\d*)/ =~ show.text)
+      
+      next if ($1 == nil)
+
       $1.length
+
       eps = Ep.where(["title like ?", "%#{show.text[0..index+$1.length+2]}%"])
       ##### 
       next if eps.present?
