@@ -9,9 +9,17 @@ class MapleCrawler
       links = node.css("a")
       links.each do |link|
         url = "http://www.maplestage.com" + link[:href]
-        # puts url
+        puts url
         crawler = MapleCrawler.new
-        crawler.fetch url
+        #crawler.fetch url until ((crawler.page_html != nil) && (crawler.page_html.css("h1.title").text.length > 0)) 
+        
+        # puts "parse_dramas: " + url
+        (1..100).each do |i|
+          # puts i.to_s
+          crawler.fetch url
+          break if ((crawler.page_html != nil) && (crawler.page_html.css("h1.title").text.length > 0))
+        end
+
         crawler.parse_drama(year,area)
       end
     end
@@ -28,16 +36,23 @@ class MapleCrawler
 
     return if body_node == nil
 
-    pic_url = body_node.css("p img")[0][:src]
+    if (body_node.css("p img") != nil)
+      if (body_node.css("p img")[0] != nil)
+        pic_url = body_node.css("p img")[0][:src]
+      end
+    end 
+    
     summary = body_node.css("p")[2] if body_node.css("p")[2]
     summary = body_node.css("p")[1] if (body_node.css("p")[1] && (summary.blank?)) 
     summary = body_node.css("p")[0] if (body_node.css("p")[0] && (summary.blank?)) 
     puts @page_url + "  do not have summary" unless summary
     
-    intro = summary.to_html
-    intro = intro.gsub("<br>","\n")
-    n = Nokogiri::HTML(intro)
-    intro = n.text
+    if(summary)
+      intro = summary.to_html
+      intro = intro.gsub("<br>","\n")
+      n = Nokogiri::HTML(intro)
+      intro = n.text
+    end
 
     drama = Drama.find_by_name(titles[0])
     puts " drama : #{drama.name} #{drama.name_en} #{drama.poster_url} #{drama.introduction} #{drama.release_date} #{drama.area.name} #{drama.directors} #{drama.actors}" if drama
@@ -99,12 +114,20 @@ class MapleCrawler
       puts "ep: #{ep.title} #{ep.drama.name}"
       url = show[:href]
       crawler = MapleCrawler.new
-      crawler.fetch url
+      #crawler.fetch url until ((crawler.page_html != nil) && (crawler.page_html.css("h2")[0] == nil))
+      
+      # puts "parse_ep: " + url
+      (1..100).each do |i|
+        # puts i.to_s
+        crawler.fetch url
+        break if ((crawler.page_html != nil) && (crawler.page_html.css("h2")[0] == nil))
+      end
       crawler.parse_source(ep)
     end   
   end
 
   def parse_source ep
+    puts "parse_source"
 
     ep.youtube_sources.each{|s| s.delete}
     

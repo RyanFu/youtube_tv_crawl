@@ -9,7 +9,14 @@ namespace :crawl do
     }
     urls.each do |area,url|
       crawler = MapleCrawler.new
-      crawler.fetch url
+      #crawler.fetch url until ((crawler.page_html != nil) && (crawler.page_html.css(".yearSorting li") != nil))
+      # puts "crawl_drama: " + url
+      (1..100).each do |i|
+        # puts i.to_s
+        crawler.fetch url
+        break if ((crawler.page_html != nil) && (crawler.page_html.css(".yearSorting li")[0] != nil))
+      end
+
       crawler.parse_dramas area
     end
   end
@@ -24,8 +31,15 @@ namespace :crawl do
   task :crawl_ep_single_thread => :environment do
     dramas = Drama.all
     dramas.each do |drama|
-      c = MapleCrawler.new
-      c.fetch drama.link
+      c = MapleCrawler.new      
+      #c.fetch drama.link until ((c.page_html != nil) && (c.page_html.css(".shows .show a") != nil))
+      # puts "crawl_ep_single_thread: " + drama.link
+      (1..100).each do |i|
+        # puts i.to_s
+        c.fetch drama.link
+        break if ((c.page_html != nil) && (c.page_html.css(".shows .show a") != nil))
+      end
+
       #puts "parse link: " + drama.link
       c.parse_ep drama
     end
