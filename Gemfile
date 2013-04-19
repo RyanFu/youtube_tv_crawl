@@ -50,3 +50,5 @@ gem 'will_paginate'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+
+gem 'newrelic_rpm'
