@@ -30,6 +30,8 @@ YoutubeCrawl::Application.routes.draw do
         end
       end
       resources :eps
+
+      resources :devices,:only => [:create]
     end
   end
   mount Sidekiq::Web, at: '/sidekiq'

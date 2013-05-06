@@ -50,3 +50,6 @@ gem 'will_paginate'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+
+#gcm
+gem 'gcm'
