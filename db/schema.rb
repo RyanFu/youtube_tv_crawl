@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506064117) do
+ActiveRecord::Schema.define(:version => 20130507095025) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -30,10 +30,17 @@ ActiveRecord::Schema.define(:version => 20130506064117) do
   add_index "device_watch_infos", ["registration_id"], :name => "index_device_watch_infos_on_registration_id"
 
   create_table "devices", :force => true do |t|
-    t.string   "registration_id"
-    t.string   "device_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "registration_id", :default => ""
+    t.string   "device_id",       :default => ""
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "drama_histories", :force => true do |t|
+    t.string   "release_date", :null => false
+    t.string   "dramas_str",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "dramas", :force => true do |t|
