@@ -30,7 +30,7 @@ class Api::ApiController  < ActionController::Base
   end
 
   def version_check
-    version = {:version_code => 25, 
+    version = {:version_code => 24, 
                  :message => "1. 增加排序方式: 依照上架日期, 依照年份
 2. 加入即時更新戲劇功能
 3. 加入清除暫存功能"
