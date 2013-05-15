@@ -22,10 +22,10 @@ namespace :crawl do
   end
 
   task :crawl_ep => :environment do
-    dramas = Drama.all
-    dramas.each do |drama|
-      CrawlWorker.perform_async(drama.id)
-    end
+    #dramas = Drama.all
+    #dramas.each do |drama|
+    #  CrawlWorker.perform_async(drama.id)
+    #end
   end
 
   task :crawl_ep_single_thread => :environment do

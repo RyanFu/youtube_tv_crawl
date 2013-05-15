@@ -2,6 +2,10 @@
 require 'gcm'
 
 class GcmSender
+
+  #撥放次數0, 上架時間 1, 2013 2,2012 3 ,2011之前 4
+  #type0, 1, 2,3
+
   def sendMessage type_id, sort_id, message
     gcm = GCM.new("AIzaSyDbiMXETtfdG4K4mUzz3IDVkND5K2jowUM")
 
