@@ -34,13 +34,15 @@ namespace :crawl do
       c = MapleCrawler.new      
       #c.fetch drama.link until ((c.page_html != nil) && (c.page_html.css(".shows .show a") != nil))
       # puts "crawl_ep_single_thread: " + drama.link
+      next if drama.id == 558  
+      # 不爬笑傲江湖(2013)
       (1..100).each do |i|
-        # puts i.to_s
+      #   puts i.to_s
         c.fetch drama.link
         break if ((c.page_html != nil) && (c.page_html.css(".shows .show a") != nil))
       end
 
-      #puts "parse link: " + drama.link
+     # puts "parse link: " + drama.link
       c.parse_ep drama
     end
   end
