@@ -47,7 +47,7 @@ gem 'whenever', :require => false
 #分頁
 gem 'will_paginate'
 
-gem 'sidekiq'
+#gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 
