@@ -30,9 +30,11 @@ class Api::ApiController  < ActionController::Base
   end
 
   def version_check
-    version = {:version_code => 28, 
-                 :message => "1. 新增影片快速播放功能, 讓影片可以在app內部快速播放
-2. 新增連續播放功能 包含Youtube, DailyMotion"
+    version = {:version_code => 29, 
+                 :message => "1. 新增Youtube 影片高畫質播放
+2. 修復部份裝置無法全螢幕問題
+3. 新增影片在app內部快速播放
+4. 新增連續播放"
     }
 
     render :json => version.to_json
