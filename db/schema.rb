@@ -11,12 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507095025) do
+ActiveRecord::Schema.define(:version => 20130709084631) do
+
+  create_table "advertisements", :force => true do |t|
+    t.string   "title"
+    t.string   "imageurl"
+    t.text     "description"
+    t.boolean  "is_show",     :default => false
+    t.integer  "type_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "campaigns", :force => true do |t|
+    t.string   "title"
+    t.string   "imageurl"
+    t.text     "description"
+    t.string   "inverse_title"
+    t.string   "inverse_imageurl"
+    t.text     "precaution"
+    t.boolean  "is_show",          :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "device_watch_infos", :force => true do |t|
@@ -73,6 +95,18 @@ ActiveRecord::Schema.define(:version => 20130507095025) do
   end
 
   add_index "eps", ["drama_id"], :name => "index_eps_on_drama_id"
+
+  create_table "tickets", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "registration_id"
+    t.integer  "serial_num"
+    t.integer  "campaign_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "tickets", ["campaign_id"], :name => "index_tickets_on_camp_id"
 
   create_table "youtube_sources", :force => true do |t|
     t.string   "link"
