@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709084631) do
+ActiveRecord::Schema.define(:version => 20130710090621) do
 
   create_table "advertisements", :force => true do |t|
     t.string   "title"
@@ -100,13 +100,13 @@ ActiveRecord::Schema.define(:version => 20130709084631) do
     t.string   "name"
     t.string   "email"
     t.string   "registration_id"
-    t.integer  "serial_num"
+    t.string   "serial_num"
     t.integer  "campaign_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "tickets", ["campaign_id"], :name => "index_tickets_on_camp_id"
+  add_index "tickets", ["campaign_id"], :name => "index_tickets_on_campaign_id"
 
   create_table "youtube_sources", :force => true do |t|
     t.string   "link"

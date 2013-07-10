@@ -19,12 +19,18 @@ class Api::V1::TicketsController < ApplicationController
       
       serial = 0
       until serial == nil
-        serial_nums = Ticket.select("serial_num").last.serial_num
+        serial_nums = Ticket.select("serial_num").last.serial_num.to_i
         serial_num = serial_nums + 1
         serial = Ticket.find_by_serial_num(serial_num)
+
+        until serial == nil
+        serial_num = serial.serial_num.to_i + 1
+        serial = Ticket.find_by_serial_num(serial_num)
+        end
       end
-        
-      @ticket.serial_num = serial_num
+      
+
+      @ticket.serial_num = "%05d"% serial_num
       @ticket.campaign_id = camp_id
 
       if @ticket.save
@@ -34,7 +40,7 @@ class Api::V1::TicketsController < ApplicationController
 
         n ={}
         
-        n["serial_num"] = @ticket.serial_num
+        n["serial_num"] =@ticket.serial_num
         n["inverse_title"] = inverse[0].inverse_title
         n["inverse_imageurl"] = inverse[0].inverse_imageurl
         n["precaution"] = inverse[0].precaution
