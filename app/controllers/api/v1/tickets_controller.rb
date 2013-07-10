@@ -33,17 +33,16 @@ class Api::V1::TicketsController < ApplicationController
         
 
         n ={}
-        n["campaign"] = {}
-        n["campaign"]["serial_num"] = @ticket.serial_num
-        n["campaign"]["inverse_title"] = inverse[0].inverse_title
-        n["campaign"]["inverse_imageurl"] = inverse[0].inverse_imageurl
-        n["campaign"]["precaution"] = inverse[0].precaution
+        
+        n["serial_num"] = @ticket.serial_num
+        n["inverse_title"] = inverse[0].inverse_title
+        n["inverse_imageurl"] = inverse[0].inverse_imageurl
+        n["precaution"] = inverse[0].precaution
  
-        response = []
-        response << n
 
 
-        render :status=>200, :json => response.to_json
+
+        render :status=>200, :json => n.to_json
       else
         render :status=>401, :json=>{:message=> "create fail" }
       end
