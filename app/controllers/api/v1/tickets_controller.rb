@@ -6,7 +6,7 @@ class Api::V1::TicketsController < ApplicationController
   	registration_id = params[:registration_id]
     camp_id = params[:campaign_id]
     
-    tickets = Ticket.where("email = ? and campaign_id =?",email,camp_id)
+    tickets = Ticket.where("email = ? and campaign_id =? and registration_id = ? ",email,camp_id,registration_id)
     
     if tickets.size > 0
       render :status=>200, :json=>{:message => "mail duplicate "}
