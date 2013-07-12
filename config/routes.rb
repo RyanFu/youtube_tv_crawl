@@ -40,7 +40,7 @@ YoutubeCrawl::Application.routes.draw do
 
       resources :campaigns,:only => [:index]
       
-      resources :tickets,:only => [:create]
+      resources :tickets,:only => [:create,:index]
     end
   end
   mount Sidekiq::Web, at: '/sidekiq'
