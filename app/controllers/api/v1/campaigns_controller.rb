@@ -8,7 +8,8 @@ class Api::V1::CampaignsController < ApplicationController
       n ={}
       n["title"] = campaign.title
       n["imageurl"] = campaign.imageurl
-      n["description"] = campaign.id
+      n["description"] = campaign.description
+      n["id"] = campaign.id
       ticket_count = Ticket.where("campaign_id = ?",campaign.id).count + 2000
       n["ticket_count"] = ticket_count
       response << n 
