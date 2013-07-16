@@ -53,3 +53,10 @@ gem 'slim'
 
 #gcm
 gem 'gcm'
+
+#HTTP accessing
+gem "httpclient"
+
+#delayed_job
+gem 'delayed_job_active_record'
+gem "daemons"

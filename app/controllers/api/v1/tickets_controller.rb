@@ -45,8 +45,10 @@ class Api::V1::TicketsController < ApplicationController
         n["inverse_imageurl"] = inverse[0].inverse_imageurl
         n["precaution"] = inverse[0].precaution
  
-
-
+        # call delay job
+        h = HttpAccessor.new
+        h.delay.update_ticket_wonder(@ticket)
+       # h.update_ticket_wonder(@ticket)
 
         render :status=>200, :json => n.to_json
       else
