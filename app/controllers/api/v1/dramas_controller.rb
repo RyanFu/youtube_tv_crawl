@@ -33,19 +33,20 @@ class Api::V1::DramasController < Api::ApiController
   def update_device_watch
     drama = Drama.find(params[:drama_id])
     drama.views += 1
-    drama.save
+  #  drama.save
     
-    device = DeviceWatchInfo.find_by_registration_id_and_drama_id(params[:registration_id],params[:drama_id]) 
-    if device
-      device.watched_ep << params[:ep_num].to_i unless device.watched_ep.include?(params[:ep_num].to_i)
-    else device
-      device = DeviceWatchInfo.new
-      device.drama_id = params[:drama_id]
-      device.watched_ep = [params[:ep_num].to_i]
-      device.registration_id = params[:registration_id]
-    end
+   # device = DeviceWatchInfo.find_by_registration_id_and_drama_id(params[:registration_id],params[:drama_id]) 
+   # if device
+   #   device.watched_ep << params[:ep_num].to_i unless device.watched_ep.include?(params[:ep_num].to_i)
+   # else device
+   #   device = DeviceWatchInfo.new
+   #   device.drama_id = params[:drama_id]
+   #   device.watched_ep = [params[:ep_num].to_i]
+   #   device.registration_id = params[:registration_id]
+   # end
 
-    if device.save
+   # if device.save
+    if drama.save
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("error message: #{@record.errors.messages}")
