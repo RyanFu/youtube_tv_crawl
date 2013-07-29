@@ -31,8 +31,8 @@ class Api::V1::DramasController < Api::ApiController
   end
 
   def update_device_watch
-    drama = Drama.find(params[:drama_id])
-    drama.views += 1
+    #drama = Drama.find(params[:drama_id])
+    #drama.views += 1
   #  drama.save
     
    # device = DeviceWatchInfo.find_by_registration_id_and_drama_id(params[:registration_id],params[:drama_id]) 
@@ -46,12 +46,12 @@ class Api::V1::DramasController < Api::ApiController
    # end
 
    # if device.save
-    if drama.save
-      render :status=>200, :json=>{:message => "success"}
-    else
-      logger.info("error message: #{@record.errors.messages}")
-      render :status=>401, :json=>{:message=> "update fail" }
-    end
+    #if drama.save
+    render :status=>200, :json=>{:message => "success"}
+    #else
+     # logger.info("error message: #{@record.errors.messages}")
+     # render :status=>401, :json=>{:message=> "update fail" }
+    #end
   end
 
   def dramas_with_views
