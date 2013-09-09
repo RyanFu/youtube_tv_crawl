@@ -9,7 +9,7 @@ class GcmSender
   def sendMessage type_id, sort_id, message
     gcm = GCM.new("AIzaSyDbiMXETtfdG4K4mUzz3IDVkND5K2jowUM")
 
-    Device.select("id, registration_id").find_in_batches( :batch_size => 1000, :conditions => ['id >= ? AND id <= ?', 170001, 180000] ) do |devices|
+    Device.select("id, registration_id").find_in_batches( :batch_size => 1000, :conditions => ['id >= ? AND id <= ?', 1200001, 1344000] ) do |devices|
 
       registration_ids = []  	
   	  devices.each do |device|
@@ -22,7 +22,8 @@ class GcmSender
       #options = {data: {type_id: type_id, sort_id: sort_id, message: message}, collapse_key: "updated_score"}
       #response = gcm.send_notification(registration_ids, options)
 
-      options = {data: {type_id: 0, sort_id: 1, message: "新劇上架: 原來是美男(台灣版), 跟我說愛我, 美甲店Paris,Dream High 2, 神醫喜來樂傳奇,陸貞傳奇(女相),天才碰麻瓜,活佛濟公, 極道鮮師2,上鎖的房間"}, collapse_key: "updated_score"}
+      options = {data: {type_id: 3, sort_id: 1, message: "新劇上架: 蘭陵王, 媽祖, 我愛你愛你愛我, 山田君與七魔女等9部新劇
+另外, 喜歡動畫與美劇的朋友, 歡迎到關於我們下載新上架的 動畫大學 與 經典美劇!"}, collapse_key: "updated_score"}
       response = gcm.send_notification(registration_ids, options)
     end
   end
