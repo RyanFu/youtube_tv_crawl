@@ -26,8 +26,10 @@ YoutubeCrawl::Application.routes.draw do
         end
       end
       resources :youtube_sources do
+
         collection do
           get 'find_by_drama_and_ep_num'
+          get 'get_56_sign'
         end
       end
       resources :eps

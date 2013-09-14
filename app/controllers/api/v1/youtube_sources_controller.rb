@@ -13,4 +13,34 @@ class Api::V1::YoutubeSourcesController < Api::ApiController
     yss = YoutubeSource.ep_youtube_sources(ep[0].id)
     render :json => yss
   end
+
+  def get_56_sign
+
+    vid = params[:vid]
+
+    appkey = "3000002938"
+
+    secret = "0eb65aefc86ca4b5"
+
+    #vid = OTU4OTQ5NDg
+    str_not_system_str = Digest::MD5.hexdigest("vid=#{vid}") #先把非系統參數用MD5加密
+    sign = Digest::MD5.hexdigest(str_not_system_str + "##{appkey}##{secret}#" + Time.now.to_time.to_i.to_s)
+
+    render :json => sign
+
+    #puts sign
+
+    #url = URI.parse("http://oapi.56.com/video/mobile.json?appkey=#{appkey}&sign=#{sign}&ts=" + Time.now.to_time.to_i.to_s + "&vid=#{vid}")
+
+    #puts url
+
+    #response = Net::HTTP.get_response(url)
+    
+
+    #json = JSON.parse(response.body)
+
+    #link = json["info"]["rfiles"][0]["url"]
+            
+  end
+
 end
