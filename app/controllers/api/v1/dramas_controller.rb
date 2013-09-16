@@ -66,7 +66,7 @@ class Api::V1::DramasController < Api::ApiController
 
 
   def hot_list
-    hot_list = ""
+    hot_list = "862,810,846,929,930,772,34,8,801,800,874,870,661,564,596,818,834,790,819,892,682,483,841,894,724,883,558,347,207"
     render :json => hot_list
   end
 
