@@ -22,6 +22,7 @@ YoutubeCrawl::Application.routes.draw do
           get 'new_dramas_info'
           get 'dramas_with_views'
           get 'dramas_with_views_v2'
+          get 'hot_list'
           put 'update_device_watch'
         end
       end

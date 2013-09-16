@@ -24,9 +24,16 @@ class Api::V1::YoutubeSourcesController < Api::ApiController
 
     #vid = OTU4OTQ5NDg
     str_not_system_str = Digest::MD5.hexdigest("vid=#{vid}") #先把非系統參數用MD5加密
-    sign = Digest::MD5.hexdigest(str_not_system_str + "##{appkey}##{secret}#" + Time.now.to_time.to_i.to_s)
 
-    render :json => sign
+    timestamp = Time.now.to_time.to_i.to_s
+
+    sign = Digest::MD5.hexdigest(str_not_system_str + "##{appkey}##{secret}#" + timestamp)
+
+    result = { "sign" => sign, "timestamp" => timestamp }
+
+    render :json => result
+
+
 
     #puts sign
 

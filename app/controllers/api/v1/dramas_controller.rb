@@ -64,4 +64,10 @@ class Api::V1::DramasController < Api::ApiController
     render :json => @drama_ids
   end
 
+
+  def hot_list
+    hot_list = ""
+    render :json => hot_list
+  end
+
 end
