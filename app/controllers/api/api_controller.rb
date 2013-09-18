@@ -30,9 +30,11 @@ class Api::ApiController  < ActionController::Base
   end
 
   def version_check
-    version = {:version_code => 36, 
-                 :message => "1. 回饋大家一直以來的支持, 電視連續劇 努力為大家取得 火影忍者 全球首部展 63折 的專屬優惠! 
-2. 增加 路長情更長, PMAM, 精忠岳飛, 急救病棟24小時5, 庶務二課2013 等20多部新劇"
+    version = {:version_code => 45, 
+                 :message => "1. 可自行選擇是否高畫質播放(HQ)影片(建議網路穩定下收看)
+2. 增加熱門推薦戲劇
+3. 增加更多來源內部播放功能
+4. 新劇上架: 女王的誕生, 浪漫滿屋, 大漢天子, 詐欺遊戲, SPEC 等超過20部劇"
     }
 
     render :json => version.to_json
