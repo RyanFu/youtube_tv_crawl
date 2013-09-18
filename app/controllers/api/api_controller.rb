@@ -30,7 +30,7 @@ class Api::ApiController  < ActionController::Base
   end
 
   def version_check
-    version = {:version_code => 45, 
+    version = {:version_code => 43, 
                  :message => "1. 可自行選擇是否高畫質播放(HQ)影片(建議網路穩定下收看)
 2. 增加熱門推薦戲劇
 3. 增加更多來源內部播放功能
